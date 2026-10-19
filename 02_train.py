@@ -1,5 +1,6 @@
-import pandas as pd
+import joblib
 from pathlib import Path
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -242,3 +243,41 @@ ax.text(0.97, 0.97, "(e)", transform=ax.transAxes, fontsize=15, fontweight="bold
 plt.tight_layout()
 plt.show()
 
+
+#Saving the optimized models
+MODELS_DIR = Path("models")
+MODELS_DIR.mkdir(parents=True, exist_ok=True)
+
+model_file_names = {
+    "Linear Regression (LR)": "linear_regression_energy.joblib",
+    "Support Vector Regression (SVR)": "svr_energy.joblib",
+    "Random Forest Regression (RFR)": "random_forest_energy.joblib",
+    "Extreme Gradient Boosting Regression (XGBoostR)": "xgboost_energy.joblib"
+}
+
+for model_name, search in searches.items():
+    model_path = MODELS_DIR / model_file_names[model_name]
+    joblib.dump(search.best_estimator_, model_path)
+    print(f"Saved {model_name}: {model_path}")
+
+best_model_row = results_df.loc[results_df["CV_RMSE_Mean"].idxmin()]
+best_model_name = best_model_row["Model"]
+final_model = searches[best_model_name].best_estimator_
+
+final_model_path = MODELS_DIR / "final_dissipated_energy_model.joblib"
+joblib.dump(final_model, final_model_path)
+
+print("\nFinal selected model:", best_model_name)
+print("Selection criterion: Lowest repeated-CV RMSE")
+print("CV RMSE:", round(best_model_row["CV_RMSE_Mean"], 6))
+print("Final model saved at:", final_model_path)
+
+loaded_model = joblib.load(final_model_path)
+
+prediction_before_saving = np.asarray(final_model.predict(X_test)).ravel()
+prediction_after_loading = np.asarray(loaded_model.predict(X_test)).ravel()
+
+if np.allclose(prediction_before_saving, prediction_after_loading):
+    print("Saved model verified successfully.")
+else:
+    raise ValueError("Loaded-model predictions do not match the original predictions.")
