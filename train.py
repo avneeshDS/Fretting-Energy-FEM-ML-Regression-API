@@ -15,7 +15,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import RepeatedKFold, RandomizedSearchCV
 
 # Loading the prepared dataset and check for null values
-path = Path("ML_fretting_screening.csv")
+path = Path("ML_fretting_data.csv")
 df= pd.read_csv(path, encoding="cp1252")
 df_ml = df.dropna().reset_index(drop=True)
 df_ml.isnull().sum()
