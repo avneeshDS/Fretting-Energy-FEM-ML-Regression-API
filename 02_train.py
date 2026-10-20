@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, train_test_split, learning_curve
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error, r2_score
@@ -21,7 +21,7 @@ df_ml = df.dropna().reset_index(drop=True)
 df_ml.isnull().sum()
 
 # Prepare features and targets
-X = df_ml[['P', 'D', 'µ', 'µP', 'µPD', 'a', 'D/a']]
+X = df_ml[['P', 'D', 'µ', 'µP', 'µPD', 'a', 'D_over_a']]
 Y1 = df_ml['DE(N-mm)']
 Y2 = df_ml['Regime']
 
