@@ -41,7 +41,7 @@ A saved model file may also be required by `main.py`. Add the correct filename t
 
 1. Define the fretting-contact input parameters and output response.
 2. Validate the finite-element model against Hertz and Cattaneo-Mindlin contact solutions.
-3. Generate the dataset using 170 finite-element simulations.
+3. Generate the dataset using finite-element simulations.
 4. Inspect the dataset and input-response relationships.
 5. Engineer physically meaningful features.
 6. Train and optimize the regression models.
