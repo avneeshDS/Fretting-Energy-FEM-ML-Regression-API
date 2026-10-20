@@ -28,7 +28,7 @@ The files currently included in this repository focus on **data exploration, reg
 ```text
 .
 |-- explore.py          # Data loading, inspection, and exploratory analysis
-|-- trainregression.py  # Regression training, optimization, evaluation, and model saving
+|-- train_regression.py  # Regression training, optimization, evaluation, and model saving
 |-- main.py             # FastAPI application for regression predictions
 |-- requirements.txt    # Python dependencies
 |-- LICENSE             # Software license
@@ -56,7 +56,7 @@ The study investigates combinations of:
 - normal load, `P`;
 - displacement amplitude, `D`;
 - coefficient of friction, `mu`;
-- ball radius, `a`; and
+- contact radius, `a`; and
 - derived features such as `D/a`, `muP`, and `muPD`.
 
 The regression target is the **dissipated energy per fretting cycle**.
