@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-path = Path("ML_fretting_screening.csv")
+path = Path("ML_fretting_data.csv")
 
 try:
     df = pd.read_csv(path, encoding="cp1252")
